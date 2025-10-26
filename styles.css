@@ -26,3 +26,65 @@
 .link{display:inline-block;margin-top:10px;color:var(--accent);text-decoration:none}
 .site-footer{margin-top:30px;padding:18px 0;background:transparent;border-top:1px solid #eceff6}
 .footer-links a{margin-left:10px;color:var(--muted);text-decoration:none}
+/* === Blog Section (AI Insights) === */
+#insights {
+  margin-top: 80px;
+  padding: 60px 0;
+  background: #fafafa;
+  border-top: 1px solid #eee;
+}
+
+#insights h2 {
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 40px;
+  color: #222;
+}
+
+#insights .posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.post {
+  background: #fff;
+  border-radius: 14px;
+  padding: 25px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.post:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+.post h3 {
+  font-size: 1.2em;
+  color: #111;
+  margin-bottom: 12px;
+}
+
+.post p {
+  font-size: 0.95em;
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 18px;
+}
+
+.post a.btn.small {
+  background: #2563eb;
+  color: white;
+  font-size: 0.85em;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+.post a.btn.small:hover {
+  background: #1e4fd1;
+}
