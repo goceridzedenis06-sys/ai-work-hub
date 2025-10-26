@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI Work Hub — Demo</title>
+  <link rel="stylesheet" href="styles.css" />
+  <meta name="description" content="Discover, compare and try top AI tools for business and content." />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="brand">AI Work Hub</div>
+      <nav class="nav">
+        <a href="#tools">Tools</a>
+        <a href="#articles">Articles</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>AI tools that actually move the needle for your business</h1>
+      <p>Compare features, pricing and trial links. Get guides and affiliate deals to implement AI fast.</p>
+      <div class="cta-row">
+        <a class="btn" href="#tools">Browse Tools</a>
+        <a class="btn ghost" href="#articles">Read Guides</a>
+      </div>
+    </section>
+
+    <section id="tools" class="cards">
+      <h2>Featured AI Tools</h2>
+      <div class="grid">
+        <!-- Tool card (repeat) -->
+        <article class="card">
+          <div class="logo">P</div>
+          <div class="info">
+            <h3>PromptForge</h3>
+            <p>AI workflows & prompt management for teams.</p>
+          </div>
+          <div class="action">
+            <a class="btn small" href="#">Try</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="logo">W</div>
+          <div class="info">
+            <h3>WriteFlow AI</h3>
+            <p>Longform copy, marketing briefs and blog drafts in minutes.</p>
+          </div>
+          <div class="action">
+            <a class="btn small" href="#">Try</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="logo">D</div>
+          <div class="info">
+            <h3>DesignMate</h3>
+            <p>AI-generated visuals, logos and quick mockups.</p>
+          </div>
+          <div class="action">
+            <a class="btn small" href="#">Try</a>
+          </div>
+        </article>
+
+        <!-- add remaining placeholder cards (you can edit later) -->
+      </div>
+    </section>
+
+    <section id="articles" class="articles">
+      <h2>Latest Articles</h2>
+      <div class="grid-articles">
+        <article class="post">
+          <h3>Top 10 AI Tools for Marketing Teams in 2025</h3>
+          <p>Discover the best AI tools to automate campaigns, analyze data and boost conversions.</p>
+          <a href="#" class="link">Read</a>
+        </article>
+
+        <article class="post">
+          <h3>How to Monetize AI Tools: Affiliate and SaaS Partnerships</h3>
+          <p>Step-by-step guide on monetizing content around AI tools with real examples and KPIs.</p>
+          <a href="#" class="link">Read</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div>© <span id="year"></span> AI Work Hub</div>
+      <div class="footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
