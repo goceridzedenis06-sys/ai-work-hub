@@ -43,11 +43,11 @@
 
 #insights .posts {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 25px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 40px; /* больше отступов между карточками */
   max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 20px;
+  margin: 40px auto; /* добавляем отступ сверху и снизу */
+  padding: 0 25px;
 }
 
 .post {
