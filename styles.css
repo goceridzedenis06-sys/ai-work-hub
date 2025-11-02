@@ -319,3 +319,48 @@
   width: auto;
   display: block;
 }
+
+/* === Анимация появления шапки === */
+.site-header {
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeInHeader 0.6s ease-out forwards;
+}
+
+/* Анимация элементов внутри шапки (лого + меню) */
+.site-header .container > * {
+  opacity: 0;
+  transform: translateY(-10px);
+  animation: fadeInItems 0.8s ease-out forwards;
+}
+
+.site-header .container > *:nth-child(1) {
+  animation-delay: 0.2s; /* логотип */
+}
+
+.site-header .container > *:nth-child(2) {
+  animation-delay: 0.4s; /* навигация */
+}
+
+/* Ключевые кадры */
+@keyframes fadeInHeader {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInItems {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
