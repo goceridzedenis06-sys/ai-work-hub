@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Productivity & Work — AI Work Hub</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="brand">AI Work Hub</div>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="articles.html">Articles</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Productivity & Work Tools</h1>
+    <p class="muted">AI tools to help you plan, organize, and work smarter.</p>
+
+    <section class="tools grid">
+
+      <article class="card tool">
+        <div class="logo"><img src="images/notion.svg" alt="Notion AI logo"></div>
+        <div class="info">
+          <h3>Notion AI</h3>
+          <p>Boost productivity in notes, docs, and projects with AI.</p>
+        </div>
+        <div class="action">
+          <a href="https://www.notion.so/product/ai" target="_blank" rel="noopener">Open Tool</a>
+        </div>
+      </article>
+
+      <article class="card tool">
+        <div class="logo"><img src="images/motion.svg" alt="Motion AI logo"></div>
+        <div class="info">
+          <h3>Motion AI</h3>
+          <p>Automatically plan your day and manage meetings with AI.</p>
+        </div>
+        <div class="action">
+          <a href="https://www.usemotion.com/" target="_blank" rel="noopener">Open Tool</a>
+        </div>
+      </article>
+
+      <article class="card tool">
+        <div class="logo"><img src="images/taskade.svg" alt="Taskade logo"></div>
+        <div class="info">
+          <h3>Taskade</h3>
+          <p>Collaborative AI workspace for planning and brainstorming.</p>
+        </div>
+        <div class="action">
+          <a href="https://www.taskade.com/" target="_blank" rel="noopener">Open Tool</a>
+        </div>
+      </article>
+
+      <article class="card tool">
+        <div class="logo"><img src="images/mem.svg" alt="Mem AI logo"></div>
+        <div class="info">
+          <h3>Mem AI</h3>
+          <p>Your intelligent second brain for notes and information.</p>
+        </div>
+        <div class="action">
+          <a href="https://mem.ai/" target="_blank" rel="noopener">Open Tool</a>
+        </div>
+      </article>
+
+      <article class="card tool">
+        <div class="logo"><img src="images/clickup.svg" alt="ClickUp Brain logo"></div>
+        <div class="info">
+          <h3>ClickUp Brain</h3>
+          <p>AI assistant inside ClickUp for tasks, docs, and team collaboration.</p>
+        </div>
+        <div class="action">
+          <a href="https://clickup.com/ai" target="_blank" rel="noopener">Open Tool</a>
+        </div>
+      </article>
+
+    </section>
+
+    <div class="back-link">
+      <a href="index.html">← Back to Categories</a>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 AI Work Hub</p>
+    </div>
+  </footer>
+
+</body>
+</html>
