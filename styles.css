@@ -184,20 +184,37 @@
   font-size: 0.9rem;
 }
 
-/* --- Кнопка справа --- */
+/* --- Кнопка "Open Tool" --- */
 .card .action a {
-  background: #2563eb;
-  color: white;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(90deg, #2563eb, #3b82f6);
+  color: #fff;
   font-weight: 500;
   text-decoration: none;
-  padding: 8px 14px;
+  padding: 8px 16px;
   border-radius: 8px;
-  transition: background 0.25s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 10px rgba(37, 99, 235, 0.25);
+}
+
+.card .action a::after {
+  content: "↗";
+  font-size: 0.9em;
+  transition: transform 0.25s ease;
 }
 
 .card .action a:hover {
-  background: #1e40af;
+  transform: translateY(-2px);
+  background: linear-gradient(90deg, #1d4ed8, #2563eb);
+  box-shadow: 0 6px 14px rgba(37, 99, 235, 0.35);
 }
+
+.card .action a:hover::after {
+  transform: translateX(4px) translateY(-2px);
+}
+
 
 /* --- Сетка карточек инструментов --- */
 .tools.grid {
