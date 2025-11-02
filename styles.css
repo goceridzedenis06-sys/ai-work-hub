@@ -139,61 +139,7 @@
 /* === Логотипы в карточках инструментов === */
 /* --- Улучшенные карточки инструментов --- */
 
-.card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 16px;
-  padding: 18px 24px;
-  margin-bottom: 18px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  transition: all 0.2s ease;
-}
-
-.card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.card .logo img {
-  width: 42px;
-  height: 42px;
-  border-radius: 8px;
-}
-
-.card .info {
-  flex: 1;
-  margin-left: 16px;
-}
-
-.card .info h3 {
-  margin: 0;
-  font-size: 1.1em;
-  color: #111827;
-}
-
-.card .info p {
-  margin: 4px 0 0;
-  color: #6b7280;
-  font-size: 0.9em;
-}
-
-.card .action a {
-  display: inline-block;
-  background: #2563eb;
-  color: white;
-  font-weight: 500;
-  text-decoration: none;
-  padding: 8px 14px;
-  border-radius: 8px;
-  transition: background 0.2s ease;
-}
-
-.card .action a:hover {
-  background: #1e40af;
-}
+v
 /* ===== Article Page Styles ===== */
 .article-page {
   max-width: 800px;
