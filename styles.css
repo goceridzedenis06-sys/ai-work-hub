@@ -136,8 +136,6 @@
 .site-footer a { color: var(--muted); text-decoration: none; }
 .site-footer a:hover { text-decoration: underline; }
 
-/* === Логотипы в карточках инструментов === */
-/* --- Улучшенные карточки инструментов --- */
 
 /* --- Карточки инструментов и логотипы --- */
 .card {
@@ -200,6 +198,15 @@
 .card .action a:hover {
   background: #1e40af;
 }
+
+/* --- Сетка карточек инструментов --- */
+.tools {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
 /* ===== Article Page Styles ===== */
 .article-page {
   max-width: 800px;
