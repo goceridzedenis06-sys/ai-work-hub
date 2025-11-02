@@ -139,7 +139,67 @@
 /* === Логотипы в карточках инструментов === */
 /* --- Улучшенные карточки инструментов --- */
 
-v
+/* --- Карточки инструментов и логотипы --- */
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  border: 1px solid #e6e7eb;
+  border-radius: 12px;
+  padding: 18px 24px;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  transition: all 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+}
+
+/* --- Логотипы в карточках --- */
+.card .logo img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border-radius: 8px;
+  flex-shrink: 0;
+  display: block;
+}
+
+/* --- Информация в карточке --- */
+.card .info {
+  flex: 1;
+  margin-left: 16px;
+}
+
+.card .info h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.card .info p {
+  margin: 4px 0 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* --- Кнопка справа --- */
+.card .action a {
+  background: #2563eb;
+  color: white;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: background 0.25s ease;
+}
+
+.card .action a:hover {
+  background: #1e40af;
+}
 /* ===== Article Page Styles ===== */
 .article-page {
   max-width: 800px;
