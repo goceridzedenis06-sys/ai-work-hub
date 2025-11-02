@@ -364,3 +364,36 @@
     transform: translateY(0);
   }
 }
+/* === Анимация появления карточек категорий === */
+.category-card {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInCards 0.7s ease-out forwards;
+}
+
+/* Поочерёдное появление карточек */
+.category-card:nth-child(1) {
+  animation-delay: 0.3s;
+}
+.category-card:nth-child(2) {
+  animation-delay: 0.45s;
+}
+.category-card:nth-child(3) {
+  animation-delay: 0.6s;
+}
+.category-card:nth-child(4) {
+  animation-delay: 0.75s;
+}
+
+/* Ключевые кадры */
+@keyframes fadeInCards {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
