@@ -227,7 +227,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   column-gap: 20px; /* расстояние между колонками */
-  row-gap: 10px; /* чуть меньше между рядами */
+  row-gap: 8px; /* чуть меньше между рядами */
   margin-top: 16px;
 }
 
