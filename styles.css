@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1000px; /* сузит ширину хедера */
+  max-width: 960px; /* сузит ширину хедера */
   margin: 0 auto;
   padding: 10px 20px;
 }
