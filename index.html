@@ -238,58 +238,49 @@
   });
 </script>
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const slider = document.querySelector(".tools-slider");
-    const btnLeft = document.querySelector(".slide-btn.left");
-    const btnRight = document.querySelector(".slide-btn.right");
-    const cards = Array.from(slider.children);
+document.addEventListener("DOMContentLoaded", () => {
+  const slider = document.querySelector(".tools-slider");
+  const btnLeft = document.querySelector(".slide-btn.left");
+  const btnRight = document.querySelector(".slide-btn.right");
 
-    let autoScroll;
-    const scrollStep = 300;
-    const loopCount = 3;
-    const scrollDelay = 4000; // время между автопрокруткой (мс)
+  // === Бесконечный слайдер ===
+  const slides = Array.from(slider.children);
+  const slideWidth = slides[0].offsetWidth + 20; // ширина + отступ
 
-    // === ФУНКЦИИ ===
-    const scrollRight = () => {
-      slider.scrollBy({ left: scrollStep, behavior: "smooth" });
-
-      setTimeout(() => {
-        if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 5) {
-          cards.slice(0, loopCount).forEach(card => slider.appendChild(card));
-          slider.scrollTo({ left: slider.scrollLeft - scrollStep * loopCount });
-        }
-      }, 400);
-    };
-
-    const scrollLeft = () => {
-      if (slider.scrollLeft <= 0) {
-        const lastCards = cards.slice(-loopCount);
-        lastCards.reverse().forEach(card => slider.prepend(card));
-        slider.scrollTo({ left: scrollStep * loopCount });
-      }
-      slider.scrollBy({ left: -scrollStep, behavior: "smooth" });
-    };
-
-    // === КНОПКИ ===
-    btnRight.addEventListener("click", scrollRight);
-    btnLeft.addEventListener("click", scrollLeft);
-
-    // === АВТОПРОКРУТКА ===
-    const startAutoScroll = () => {
-      autoScroll = setInterval(scrollRight, scrollDelay);
-    };
-
-    const stopAutoScroll = () => {
-      clearInterval(autoScroll);
-    };
-
-    // Запускаем автопрокрутку
-    startAutoScroll();
-
-    // При наведении — пауза
-    slider.addEventListener("mouseenter", stopAutoScroll);
-    slider.addEventListener("mouseleave", startAutoScroll);
+  // Клонируем карточки для плавного перехода
+  slides.slice(0, 3).forEach(slide => {
+    const clone = slide.cloneNode(true);
+    slider.appendChild(clone);
   });
+  slides.slice(-3).forEach(slide => {
+    const clone = slide.cloneNode(true);
+    slider.prepend(clone);
+  });
+
+  let scrollPosition = slider.scrollWidth / 2;
+
+  slider.scrollLeft = scrollPosition;
+
+  const scrollStep = slideWidth;
+
+  function scrollSmooth(offset) {
+    slider.scrollBy({ left: offset, behavior: "smooth" });
+
+    setTimeout(() => {
+      if (slider.scrollLeft <= 0) {
+        slider.scrollLeft = scrollPosition;
+      } else if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth) {
+        slider.scrollLeft = scrollPosition - slider.clientWidth;
+      }
+    }, 400);
+  }
+
+  btnLeft.addEventListener("click", () => scrollSmooth(-scrollStep));
+  btnRight.addEventListener("click", () => scrollSmooth(scrollStep));
+
+  // === Автопрокрутка ===
+  setInterval(() => scrollSmooth(scrollStep), 3500);
+});
 </script>
 
   
