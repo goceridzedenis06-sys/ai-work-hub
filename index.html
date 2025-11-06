@@ -247,12 +247,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const intervalTime = 15; // частота кадров
   const autoDelay = 6000; // пауза перед автопрокруткой
 
-  // === Реальный бесконечный цикл ===
+  // === Плавная бесконечная прокрутка ===
   function loopScroll() {
     if (!isPaused) {
       slider.scrollLeft += scrollStep;
-      if (slider.scrollLeft >= slider.scrollWidth - slider.clientWidth) {
-        slider.scrollLeft = 0; // возвращаемся в начало без рывков
+      if (slider.scrollLeft >= slider.scrollWidth - slider.clientWidth - 1) {
+        slider.scrollLeft = 0; // плавно возвращаемся в начало
       }
     }
   }
@@ -261,14 +261,17 @@ document.addEventListener("DOMContentLoaded", () => {
   btnLeft.addEventListener("click", () => {
     slider.scrollLeft -= slider.clientWidth / 2;
     if (slider.scrollLeft <= 0) {
-      slider.scrollLeft = slider.scrollWidth - slider.clientWidth;
+      slider.scrollLeft = slider.scrollWidth - slider.clientWidth; // прыгаем в конец
     }
   });
 
   btnRight.addEventListener("click", () => {
-    slider.scrollLeft += slider.clientWidth / 2;
-    if (slider.scrollLeft >= slider.scrollWidth - slider.clientWidth) {
-      slider.scrollLeft = 0;
+    const maxScroll = slider.scrollWidth - slider.clientWidth;
+    if (slider.scrollLeft >= maxScroll - 5) {
+      // если дошли до конца — возвращаемся в начало
+      slider.scrollTo({ left: 0, behavior: "smooth" });
+    } else {
+      slider.scrollBy({ left: slider.clientWidth / 2, behavior: "smooth" });
     }
   });
 
@@ -294,7 +297,7 @@ document.addEventListener("DOMContentLoaded", () => {
     el.addEventListener("mouseleave", () => (isPaused = false));
   });
 
-  // === Плавный постоянный цикл ===
+  // === Плавное постоянное движение ===
   setInterval(loopScroll, intervalTime);
 });
 </script>
