@@ -245,47 +245,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!slider || !btnLeft || !btnRight) return;
 
-  // 🔁 Дублируем карточки: теперь внутри 1..10 + 1..10
-  slider.innerHTML = slider.innerHTML + slider.innerHTML;
+  // 🔁 Дублируем карточки для бесконечной прокрутки
+  const original = slider.innerHTML;
+  slider.innerHTML = original + original;
 
-  const halfWidth = slider.scrollWidth / 2; // граница "реального" круга
+  // Сразу вычисляем половину ширины
+  let halfWidth = slider.scrollWidth / 2;
+
+  // Пересчитываем при изменении размера окна
+  window.addEventListener("resize", () => {
+    halfWidth = slider.scrollWidth / 2;
+  });
+
   let isPaused = false;
-  const speed = 0.5; // скорость "реки" (можешь сделать 0.4 медленнее или 0.7 быстрее)
+  const speed = 0.5; // скорость "реки"
 
   // === Бесконечная плавная прокрутка ===
   function loop() {
     if (!isPaused) {
       slider.scrollLeft += speed;
 
-      // как только дошли до второй половины — мягко возвращаемся назад на такую же позицию
+      // когда дошли до конца первой половины — перескакиваем мгновенно и незаметно
       if (slider.scrollLeft >= halfWidth) {
         slider.scrollLeft -= halfWidth;
-      } else if (slider.scrollLeft < 0) {
-        slider.scrollLeft += halfWidth;
       }
     }
     requestAnimationFrame(loop);
   }
 
-  const step = () => slider.clientWidth / 2; // шаг стрелки — полэкрана
-
-  // === Стрелка вправо (листать по кругу) ===
-  btnRight.addEventListener("click", () => {
-    let target = slider.scrollLeft + step();
-    if (target >= halfWidth) {
-      target -= halfWidth;
-    }
+  // === Управление стрелками (по кругу) ===
+  function scrollStep(direction) {
+    const step = slider.clientWidth / 2;
+    let target = slider.scrollLeft + direction * step;
+    if (target >= halfWidth) target -= halfWidth;
+    if (target < 0) target += halfWidth;
     slider.scrollTo({ left: target, behavior: "smooth" });
-  });
+  }
 
-  // === Стрелка влево (листать по кругу) ===
-  btnLeft.addEventListener("click", () => {
-    let target = slider.scrollLeft - step();
-    if (target < 0) {
-      target += halfWidth;
-    }
-    slider.scrollTo({ left: target, behavior: "smooth" });
-  });
+  btnRight.addEventListener("click", () => scrollStep(1));
+  btnLeft.addEventListener("click", () => scrollStep(-1));
 
   // === Пауза при наведении ===
   [slider, btnLeft, btnRight].forEach(el => {
@@ -293,7 +291,7 @@ document.addEventListener("DOMContentLoaded", () => {
     el.addEventListener("mouseleave", () => { isPaused = false; });
   });
 
-  // Старт "реки"
+  // Запускаем "реку"
   requestAnimationFrame(loop);
 });
 </script>
