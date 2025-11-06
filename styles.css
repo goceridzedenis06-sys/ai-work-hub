@@ -53,7 +53,7 @@ body {
   width: auto;
   display: block;
 
-  transform: scale(1.4);  /* увеличивает логотип визуально */
+  transform: scale(1.7);  /* увеличивает логотип визуально */
   transform-origin: left center; /* масштабируется влево от центра */
 }
 
