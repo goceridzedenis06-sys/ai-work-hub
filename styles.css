@@ -49,10 +49,14 @@ body {
 
 /* === Лого === */
 .site-logo {
-  height: 100px;
+  height: 70px;           /* немного меньше фактическая высота */
   width: auto;
   display: block;
+
+  transform: scale(1.4);  /* увеличивает логотип визуально */
+  transform-origin: left center; /* масштабируется влево от центра */
 }
+
 
 /* === Навигация === */
 .nav {
@@ -275,4 +279,41 @@ body {
 @keyframes fadeInHeader {
   from { opacity: 0; transform: translateY(-20px); }
   to { opacity: 1; transform: translateY(0); }
+}
+/* === Эффект плавного появления карточек категорий === */
+.category-card,
+.card,
+.post {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInCards 0.8s ease-out forwards;
+}
+
+/* Задержки для эффекта волны */
+.category-card:nth-child(1),
+.card:nth-child(1),
+.post:nth-child(1) { animation-delay: 0.2s; }
+.category-card:nth-child(2),
+.card:nth-child(2),
+.post:nth-child(2) { animation-delay: 0.35s; }
+.category-card:nth-child(3),
+.card:nth-child(3),
+.post:nth-child(3) { animation-delay: 0.5s; }
+.category-card:nth-child(4),
+.card:nth-child(4),
+.post:nth-child(4) { animation-delay: 0.65s; }
+.category-card:nth-child(5),
+.card:nth-child(5),
+.post:nth-child(5) { animation-delay: 0.8s; }
+
+/* Ключевые кадры */
+@keyframes fadeInCards {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
