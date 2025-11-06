@@ -238,21 +238,60 @@
   });
 </script>
 <script>
-  // Прокрутка влево/вправо
   document.addEventListener("DOMContentLoaded", () => {
     const slider = document.querySelector(".tools-slider");
     const btnLeft = document.querySelector(".slide-btn.left");
     const btnRight = document.querySelector(".slide-btn.right");
+    const cards = Array.from(slider.children);
 
-    btnLeft.addEventListener("click", () => {
-      slider.scrollBy({ left: -300, behavior: "smooth" });
-    });
+    let autoScroll;
+    const scrollStep = 300;
+    const loopCount = 3;
+    const scrollDelay = 4000; // время между автопрокруткой (мс)
 
-    btnRight.addEventListener("click", () => {
-      slider.scrollBy({ left: 300, behavior: "smooth" });
-    });
+    // === ФУНКЦИИ ===
+    const scrollRight = () => {
+      slider.scrollBy({ left: scrollStep, behavior: "smooth" });
+
+      setTimeout(() => {
+        if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 5) {
+          cards.slice(0, loopCount).forEach(card => slider.appendChild(card));
+          slider.scrollTo({ left: slider.scrollLeft - scrollStep * loopCount });
+        }
+      }, 400);
+    };
+
+    const scrollLeft = () => {
+      if (slider.scrollLeft <= 0) {
+        const lastCards = cards.slice(-loopCount);
+        lastCards.reverse().forEach(card => slider.prepend(card));
+        slider.scrollTo({ left: scrollStep * loopCount });
+      }
+      slider.scrollBy({ left: -scrollStep, behavior: "smooth" });
+    };
+
+    // === КНОПКИ ===
+    btnRight.addEventListener("click", scrollRight);
+    btnLeft.addEventListener("click", scrollLeft);
+
+    // === АВТОПРОКРУТКА ===
+    const startAutoScroll = () => {
+      autoScroll = setInterval(scrollRight, scrollDelay);
+    };
+
+    const stopAutoScroll = () => {
+      clearInterval(autoScroll);
+    };
+
+    // Запускаем автопрокрутку
+    startAutoScroll();
+
+    // При наведении — пауза
+    slider.addEventListener("mouseenter", stopAutoScroll);
+    slider.addEventListener("mouseleave", startAutoScroll);
   });
 </script>
+
   
 </body>
 </html>
