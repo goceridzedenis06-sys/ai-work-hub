@@ -244,52 +244,46 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnRight = document.querySelector(".slide-btn.right");
 
   let isPaused = false;
-  const scrollStep = 1.2;      // скорость реки (можно 0.8, если хочешь медленнее)
-  const intervalTime = 15;     // частота кадров
-  const EDGE_OFFSET = 5;       // небольшой запас, чтобы не застревать у края
+  const scrollStep = 1.2;   // скорость движения (меньше = медленнее)
+  const intervalTime = 15;  // интервал движения (меньше = плавнее)
+  const buffer = 20;        // запас пикселей до конца
 
-  function getMaxScroll() {
-    return slider.scrollWidth - slider.clientWidth;
-  }
-
-  // === Плавная бесконечная "река" ===
+  // === Бесконечная река ===
   function loopScroll() {
     if (!isPaused) {
       slider.scrollLeft += scrollStep;
 
-      const maxScroll = getMaxScroll();
-      if (slider.scrollLeft >= maxScroll - EDGE_OFFSET) {
-        // дошли до конца — мягко возвращаемся в начало
-        slider.scrollLeft = 0;
+      const maxScroll = slider.scrollWidth - slider.clientWidth;
+
+      // Когда почти дошли до конца — мгновенно (но незаметно) возвращаем в начало
+      if (slider.scrollLeft >= maxScroll - buffer) {
+        slider.scrollLeft = 1; // не 0, чтобы избежать дергания
       }
     }
   }
 
   setInterval(loopScroll, intervalTime);
 
-  // === Стрелка влево (кольцо) ===
+  // === Управление стрелками ===
   btnLeft.addEventListener("click", () => {
     slider.scrollLeft -= slider.clientWidth / 2;
-
-    if (slider.scrollLeft <= EDGE_OFFSET) {
-      slider.scrollLeft = getMaxScroll(); // с начала — в конец
+    if (slider.scrollLeft <= 0) {
+      slider.scrollLeft = slider.scrollWidth - slider.clientWidth - buffer;
     }
   });
 
-  // === Стрелка вправо (кольцо) ===
   btnRight.addEventListener("click", () => {
-    const maxScroll = getMaxScroll();
     slider.scrollLeft += slider.clientWidth / 2;
-
-    if (slider.scrollLeft >= maxScroll - EDGE_OFFSET) {
-      slider.scrollLeft = 0; // с конца — в начало
+    const maxScroll = slider.scrollWidth - slider.clientWidth;
+    if (slider.scrollLeft >= maxScroll - buffer) {
+      slider.scrollLeft = 1;
     }
   });
 
-  // === Пауза при наведении на блок или стрелки ===
+  // === Пауза при наведении ===
   [slider, btnLeft, btnRight].forEach(el => {
-    el.addEventListener("mouseenter", () => { isPaused = true; });
-    el.addEventListener("mouseleave", () => { isPaused = false; });
+    el.addEventListener("mouseenter", () => (isPaused = true));
+    el.addEventListener("mouseleave", () => (isPaused = false));
   });
 });
 </script>
