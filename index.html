@@ -242,47 +242,62 @@ document.addEventListener("DOMContentLoaded", () => {
   const slider = document.querySelector(".tools-slider");
   const btnLeft = document.querySelector(".slide-btn.left");
   const btnRight = document.querySelector(".slide-btn.right");
+  let isPaused = false;
+  const scrollStep = 1.2; // скорость движения (меньше = плавнее)
+  const intervalTime = 15; // частота кадров
+  const autoDelay = 6000; // пауза перед автопрокруткой
 
-  // === Бесконечный слайдер ===
-  const slides = Array.from(slider.children);
-  const slideWidth = slides[0].offsetWidth + 20; // ширина + отступ
-
-  // Клонируем карточки для плавного перехода
-  slides.slice(0, 3).forEach(slide => {
-    const clone = slide.cloneNode(true);
-    slider.appendChild(clone);
-  });
-  slides.slice(-3).forEach(slide => {
-    const clone = slide.cloneNode(true);
-    slider.prepend(clone);
-  });
-
-  let scrollPosition = slider.scrollWidth / 2;
-
-  slider.scrollLeft = scrollPosition;
-
-  const scrollStep = slideWidth;
-
-  function scrollSmooth(offset) {
-    slider.scrollBy({ left: offset, behavior: "smooth" });
-
-    setTimeout(() => {
-      if (slider.scrollLeft <= 0) {
-        slider.scrollLeft = scrollPosition;
-      } else if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth) {
-        slider.scrollLeft = scrollPosition - slider.clientWidth;
+  // === Реальный бесконечный цикл ===
+  function loopScroll() {
+    if (!isPaused) {
+      slider.scrollLeft += scrollStep;
+      if (slider.scrollLeft >= slider.scrollWidth - slider.clientWidth) {
+        slider.scrollLeft = 0; // возвращаемся в начало без рывков
       }
-    }, 400);
+    }
   }
 
-  btnLeft.addEventListener("click", () => scrollSmooth(-scrollStep));
-  btnRight.addEventListener("click", () => scrollSmooth(scrollStep));
+  // === Управление стрелками ===
+  btnLeft.addEventListener("click", () => {
+    slider.scrollLeft -= slider.clientWidth / 2;
+    if (slider.scrollLeft <= 0) {
+      slider.scrollLeft = slider.scrollWidth - slider.clientWidth;
+    }
+  });
 
-  // === Автопрокрутка ===
-  setInterval(() => scrollSmooth(scrollStep), 3500);
+  btnRight.addEventListener("click", () => {
+    slider.scrollLeft += slider.clientWidth / 2;
+    if (slider.scrollLeft >= slider.scrollWidth - slider.clientWidth) {
+      slider.scrollLeft = 0;
+    }
+  });
+
+  // === Автоматическая прокрутка ===
+  let autoScroll;
+  function startAutoScroll() {
+    clearInterval(autoScroll);
+    autoScroll = setInterval(() => {
+      if (!isPaused) {
+        slider.scrollLeft += slider.clientWidth / 4;
+        if (slider.scrollLeft >= slider.scrollWidth - slider.clientWidth) {
+          slider.scrollLeft = 0;
+        }
+      }
+    }, autoDelay);
+  }
+
+  startAutoScroll();
+
+  // === Пауза при наведении ===
+  [slider, btnLeft, btnRight].forEach(el => {
+    el.addEventListener("mouseenter", () => (isPaused = true));
+    el.addEventListener("mouseleave", () => (isPaused = false));
+  });
+
+  // === Плавный постоянный цикл ===
+  setInterval(loopScroll, intervalTime);
 });
 </script>
-
   
 </body>
 </html>
