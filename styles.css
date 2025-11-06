@@ -318,3 +318,66 @@ body {
     transform: translateY(0);
   }
 }
+/* === Восстановленные стили для SEO-статей === */
+.articles {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px; /* равномерные отступы между карточками */
+}
+
+.post {
+  background: #fff;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInPost 0.8s ease-out forwards;
+}
+
+.post:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+.post h3 {
+  margin: 0 0 10px;
+  font-size: 1.1rem;
+  color: #111;
+}
+
+.post p {
+  margin: 0 0 16px;
+  color: #555;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.post a.btn.small {
+  background: #2563eb;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  transition: background 0.3s ease;
+}
+
+.post a.btn.small:hover {
+  background: #1e40af;
+}
+
+/* Плавная анимация появления */
+@keyframes fadeInPost {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
