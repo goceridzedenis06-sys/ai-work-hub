@@ -1,17 +1,83 @@
-:root{--bg:#f7f7fb;--card:#ffffff;--accent:#5b21b6;--muted:#6b7280}
-*{box-sizing:border-box}body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;padding:0;margin:0;background:var(--bg);color:#0f172a}
-.container{max-width:1000px;margin:0 auto;padding:28px}
-.site-header{background:#fff;border-bottom:1px solid #e6e9ef}
+:root {
+  --bg: #f7f7fb;
+  --card: #ffffff;
+  --accent: #5b21b6;
+  --muted: #6b7280;
+}
+
+/* === Общие стили === */
+* { box-sizing: border-box; }
+
+body {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+  padding: 0;
+  margin: 0;
+  background: var(--bg);
+  color: #0f172a;
+}
+
+/* === Контейнер === */
+/* 👉 Меняй max-width здесь, чтобы изменить ширину шапки и контента */
+.container {
+  max-width: 1000px; /* ← например, поставь 1100px, если хочешь чуть шире */
+  margin: 0 auto;
+  padding: 28px;
+}
+
+/* === Хедер === */
+.site-header {
+  background: #fff;
+  padding: 10px 0;
+  border-bottom: 1px solid #e6e9ef;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeInHeader 0.6s ease-out forwards;
+}
+
 .site-header .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 960px; /* сузит ширину хедера */
+  max-width: 960px;
   margin: 0 auto;
   padding: 10px 20px;
 }
-.brand{font-weight:700;color:var(--accent)}
-.nav a{margin-left:16px;color:var(--muted);text-decoration:none}
+
+/* === Лого === */
+.site-logo {
+  height: 45px;
+  width: auto;
+  display: block;
+}
+
+/* === Навигация === */
+.nav {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.nav a {
+  padding: 8px 18px;
+  border-radius: 25px;
+  background-color: #f5f5f5;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.25s ease;
+}
+
+.nav a:hover {
+  background-color: #e9f1ff;
+  color: #3b82f6;
+  transform: scale(1.05);
+}
+
+/* === Герой-блок === */
 .hero {
   padding: 48px 0 32px;
   text-align: center;
@@ -26,140 +92,25 @@
   color: var(--muted);
   margin-bottom: 24px;
 }
-.hero h1{font-size:28px;margin:0 0 12px}
-.hero p{color:var(--muted);margin:0 0 16px}
-.cta-row .btn{display:inline-block;padding:10px 16px;border-radius:8px;text-decoration:none}
-.btn{background:var(--accent);color:#fff}
-.btn.ghost{background:transparent;border:1px solid #e6e9ef;color:var(--accent)}
-.cards{margin-top:18px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
-.card{background:var(--card);padding:12px;border-radius:10px;display:flex;align-items:center;gap:12px;box-shadow:0 1px 4px rgba(15,23,42,0.06)}
-.logo{width:56px;height:56px;border-radius:8px;background:#eef2ff;color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700}
-.info h3{margin:0;font-size:16px}
-.info p{margin:6px 0 0;color:var(--muted);font-size:13px}
-.action .btn.small{padding:8px 12px;border-radius:8px;font-size:13px}
-.articles{margin-top:28px}
-.grid-articles{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
-.post{background:var(--card);padding:14px;border-radius:10px;box-shadow:0 1px 4px rgba(15,23,42,0.04)}
-.post h3{margin:0 0 6px;font-size:16px}
-.post p{margin:0;color:var(--muted);font-size:13px}
-.link{display:inline-block;margin-top:10px;color:var(--accent);text-decoration:none}
-.site-footer{margin-top:30px;padding:18px 0;background:transparent;border-top:1px solid #eceff6}
-.footer-links a{margin-left:10px;color:var(--muted);text-decoration:none}
-/* === Blog Section (AI Insights) === */
-#insights {
-  margin-top: 80px;
-  padding: 60px 0;
-  background: #fafafa;
-  border-top: 1px solid #eee;
-}
 
-#insights h2 {
-  text-align: center;
-  font-size: 2em;
-  margin-bottom: 40px;
-  color: #222;
-}
-
-#insights .posts {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 40px; /* больше отступов между карточками */
-  max-width: 1100px;
-  margin: 40px auto; /* добавляем отступ сверху и снизу */
-  padding: 0 25px;
-}
-
-.post {
-  background: #fff;
-  border-radius: 14px;
-  padding: 25px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  margin-bottom:18px;
-}
-
-.post:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
-}
-
-.post h3 {
-  font-size: 1.2em;
-  color: #111;
-  margin-bottom: 12px;
-}
-
-.post p {
-  font-size: 0.95em;
-  color: #555;
-  line-height: 1.5;
-  margin-bottom: 18px;
-}
-
-.post a.btn.small {
-  background: #2563eb;
-  color: white;
-  font-size: 0.85em;
-  padding: 8px 16px;
-  border-radius: 6px;
+.cta-row .btn {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 8px;
   text-decoration: none;
+  background: var(--accent);
+  color: #fff;
 }
 
-.post a.btn.small:hover {
-  background: #1e4fd1;
-}
-/* Стили для блока статей */
-.posts {
-  display: flex;
-  flex-direction: column;
-  gap: 30px; /* расстояние между статьями */
-}
-
-.post {
-  background: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  margin-bottom: 0; /* убираем, так как теперь используем gap */
+/* === Карточки инструментов === */
+.tools.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  column-gap: 20px;
+  row-gap: 8px;
+  margin-top: 16px;
 }
 
-.post:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-/* Контейнер для статей */
-.articles {
-  display: flex;
-  flex-direction: column;
-  gap: 15px; /* постоянный отступ между статьями */
-  margin-bottom: 40px;
-}
-
-/* Каждая статья */
-.post {
-  background: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.post:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-/* Базовые мелкие улучшения навигации и футера */
-.nav a { text-decoration: none; padding: 6px 10px; border-radius: 6px; }
-.nav a:hover { background: #f1f5f9; }
-
-.site-footer p { margin: 6px 0; }
-.site-footer a { color: var(--muted); text-decoration: none; }
-.site-footer a:hover { text-decoration: underline; }
-
-
-/* --- Карточки инструментов и логотипы --- */
 .card {
   display: flex;
   align-items: center;
@@ -168,7 +119,6 @@
   border: 1px solid #e6e7eb;
   border-radius: 12px;
   padding: 18px 24px;
-  margin-bottom: 18px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
   transition: all 0.25s ease;
 }
@@ -178,17 +128,13 @@
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
 }
 
-/* --- Логотипы в карточках --- */
 .card .logo img {
   width: 48px;
   height: 48px;
   object-fit: contain;
   border-radius: 8px;
-  flex-shrink: 0;
-  display: block;
 }
 
-/* --- Информация в карточке --- */
 .card .info {
   flex: 1;
   margin-left: 16px;
@@ -206,7 +152,7 @@
   font-size: 0.9rem;
 }
 
-/* --- Кнопка "Open Tool" --- */
+/* Кнопка "Open Tool" */
 .card .action a {
   display: inline-flex !important;
   align-items: center !important;
@@ -216,9 +162,9 @@
   color: #fff !important;
   font-weight: 600;
   text-decoration: none !important;
-  padding: 7px 14px !important; /* уменьшили размер */
+  padding: 7px 14px !important;
   border-radius: 8px;
-  font-size: 0.85rem; /* чуть меньше текст */
+  font-size: 0.85rem;
   transition: all 0.3s ease;
   box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
 }
@@ -243,49 +189,9 @@
   transform: translateX(4px) translateY(-2px);
 }
 
-
-/* --- Сетка карточек инструментов --- */
-.tools.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  column-gap: 20px; /* расстояние между колонками */
-  row-gap: 8px; /* чуть меньше между рядами */
-  margin-top: 16px;
-}
-
-/* ===== Article Page Styles ===== */
-.article-page {
-  max-width: 800px;
-  margin: 2rem auto;
-  line-height: 1.7;
-}
-
-.article-cover {
-  width: 100%;
-  max-height: 400px;
-  object-fit: cover;
-  border-radius: 12px;
-  margin-bottom: 20px;
-}
-
-.article-meta {
-  color: #777;
-  font-size: 0.9rem;
-  margin-bottom: 20px;
-}
-
-.back-link {
-  margin-top: 30px;
-}
-
-.back-link a {
-  color: #0066ff;
-  text-decoration: none;
-  font-weight: bold;
-}
-/* ===== Category grid ===== */
-.categories { 
-  margin-top: 2rem; 
+/* === Категории === */
+.categories {
+  margin-top: 2rem;
   text-align: center;
 }
 
@@ -302,200 +208,71 @@
   border-radius: 14px;
   padding: 18px;
   text-decoration: none;
-  box-shadow: 0 2px 8px rgba(0,0,0,.06);
-  transition: transform .18s, box-shadow .18s;
-  border: 1px solid rgba(0,0,0,.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: transform 0.18s, box-shadow 0.18s;
 }
 
 .category-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 22px rgba(0,0,0,.09);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.09);
 }
 
-.cat-emoji { 
-  font-size: 32px; 
-  line-height: 1; 
+.cat-emoji { font-size: 32px; }
+.cat-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin: 6px 0 4px;
+  color: #1f2937;
 }
 
-.cat-title { 
-  font-weight: 700; 
-  font-size: 1.05rem; 
-  margin: 6px 0 4px; 
-  color:#1f2937; 
+.category-card p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.95rem;
 }
 
-.category-card p { 
-  margin: 0; 
-  color:#6b7280; 
-  font-size: .95rem; 
-}
-.site-logo {
-  height: 150px; /* можешь подогнать под свой логотип */
-  width: auto;
-  display: block;
-}
-
-/* === Анимация появления шапки === */
-.site-header {
-  opacity: 0;
-  transform: translateY(-20px);
-  animation: fadeInHeader 0.6s ease-out forwards;
-}
-
-/* Анимация элементов внутри шапки (лого + меню) */
-.site-header .container > * {
-  opacity: 0;
-  transform: translateY(-10px);
-  animation: fadeInItems 0.8s ease-out forwards;
-}
-
-.site-header .container > *:nth-child(1) {
-  animation-delay: 0.2s; /* логотип */
-}
-
-.site-header .container > *:nth-child(2) {
-  animation-delay: 0.4s; /* навигация */
-}
-
-/* Ключевые кадры */
-@keyframes fadeInHeader {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInItems {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-/* === Анимация появления карточек категорий === */
-.category-card {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInCards 0.7s ease-out forwards;
-}
-
-/* Поочерёдное появление карточек */
-.category-card:nth-child(1) {
-  animation-delay: 0.3s;
-}
-.category-card:nth-child(2) {
-  animation-delay: 0.45s;
-}
-.category-card:nth-child(3) {
-  animation-delay: 0.6s;
-}
-.category-card:nth-child(4) {
-  animation-delay: 0.75s;
-}
-
-/* Ключевые кадры */
-@keyframes fadeInCards {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-/* === Анимация появления карточек инструментов и статей === */
-.card, 
-.post {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInTools 0.7s ease-out forwards;
-}
-
-/* Поочередное появление карточек (эффект волны) */
-.card:nth-child(1),
-.post:nth-child(1) {
-  animation-delay: 0.2s;
-}
-.card:nth-child(2),
-.post:nth-child(2) {
-  animation-delay: 0.35s;
-}
-.card:nth-child(3),
-.post:nth-child(3) {
-  animation-delay: 0.5s;
-}
-.card:nth-child(4),
-.post:nth-child(4) {
-  animation-delay: 0.65s;
-}
-.card:nth-child(5),
-.post:nth-child(5) {
-  animation-delay: 0.8s;
-}
-
-/* Ключевые кадры */
-@keyframes fadeInTools {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-/* === Анимация появления при прокрутке === */
-.fade-in {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-}
-
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-/* === Header Modern Redesign === */
-.site-header {
-  background: #fff;
-  padding: 10px 0;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-
-.site-logo {
-  height: 45px;
-}
-
-.nav {
+/* === Статьи === */
+.articles {
   display: flex;
-  gap: 10px;
-  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 40px;
 }
 
-.nav a {
-  padding: 8px 18px;
-  margin-left: 6px;
-  border-radius: 25px;
-  background-color: #f5f5f5;
-  color: #333;
+.post {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.post:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* === Футер === */
+.site-footer {
+  margin-top: 30px;
+  padding: 18px 0;
+  background: transparent;
+  border-top: 1px solid #eceff6;
+}
+
+.footer-links a {
+  margin-left: 10px;
+  color: var(--muted);
   text-decoration: none;
-  font-weight: 500;
-  transition: all 0.25s ease;
 }
 
-.nav a:hover {
-  background-color: #e9f1ff; /* лёгкий голубоватый оттенок */
-  color: #3b82f6; /* цвет логотипа */
-  transform: scale(1.05); /* плавное увеличение */
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+/* === Анимации === */
+@keyframes fadeInHeader {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
