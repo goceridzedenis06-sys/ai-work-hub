@@ -55,7 +55,7 @@ body {
 
   transform: scale(1.7);  /* увеличивает логотип визуально */
   transform-origin: left center; /* масштабируется влево от центра */
-  margin-bottom:-8px;
+  margin-bottom: 8px;
 }
 
 
