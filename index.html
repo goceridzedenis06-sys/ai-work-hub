@@ -245,43 +245,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!slider || !btnLeft || !btnRight) return;
 
-  // 🔁 Дублируем карточки (создаём ленту 1..10 1..10)
-  const original = slider.innerHTML;
-  slider.innerHTML = original + original;
-
-  let halfWidth = slider.scrollWidth / 2;
   let isPaused = false;
-  const speed = 0.5; // скорость "реки"
+  const speed = 0.4; // скорость плавной "реки"
+  let scrollPos = 0;
 
-  // Пересчитываем при изменении размера окна
-  window.addEventListener("resize", () => {
-    halfWidth = slider.scrollWidth / 2;
-  });
-
-  // === Главный цикл ===
-  function loop() {
+  // === Главная функция движения ===
+  function animate() {
     if (!isPaused) {
-      slider.scrollLeft += speed;
+      scrollPos += speed;
 
-      // Когда дошли до конца — плавно перескакиваем и продолжаем движение
-      if (slider.scrollLeft >= halfWidth) {
-        slider.scrollLeft -= halfWidth;
-        // 👇 форсируем обновление кадра, чтобы поток не завис
-        requestAnimationFrame(() => {
-          slider.scrollLeft += speed;
-        });
+      const maxScroll = slider.scrollWidth - slider.clientWidth;
+
+      // если дошли до конца, аккуратно возвращаемся в начало без рывков
+      if (scrollPos >= maxScroll - 1) {
+        scrollPos = 0;
       }
+
+      slider.scrollLeft = scrollPos;
     }
-    requestAnimationFrame(loop);
+
+    requestAnimationFrame(animate);
   }
 
-  // === Стрелки (влево/вправо по кругу) ===
+  // === Стрелки (по кругу) ===
   function scrollStep(direction) {
     const step = slider.clientWidth / 2;
-    let target = slider.scrollLeft + direction * step;
-    if (target >= halfWidth) target -= halfWidth;
-    if (target < 0) target += halfWidth;
-    slider.scrollTo({ left: target, behavior: "smooth" });
+    const maxScroll = slider.scrollWidth - slider.clientWidth;
+
+    scrollPos += direction * step;
+    if (scrollPos > maxScroll) scrollPos = 0;
+    if (scrollPos < 0) scrollPos = maxScroll;
+
+    slider.scrollTo({ left: scrollPos, behavior: "smooth" });
   }
 
   btnRight.addEventListener("click", () => scrollStep(1));
@@ -289,14 +284,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // === Пауза при наведении ===
   [slider, btnLeft, btnRight].forEach(el => {
-    el.addEventListener("mouseenter", () => { isPaused = true; });
-    el.addEventListener("mouseleave", () => { isPaused = false; });
+    el.addEventListener("mouseenter", () => (isPaused = true));
+    el.addEventListener("mouseleave", () => (isPaused = false));
   });
 
-  // 🚀 Старт анимации
-  requestAnimationFrame(loop);
+  // === Безопасный перезапуск анимации при изменении размеров ===
+  window.addEventListener("resize", () => {
+    scrollPos = slider.scrollLeft;
+  });
+
+  // 🚀 Запуск
+  requestAnimationFrame(animate);
 });
 </script>
+
   
 </body>
 </html>
