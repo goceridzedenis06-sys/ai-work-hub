@@ -463,3 +463,39 @@
   opacity: 1;
   transform: translateY(0);
 }
+/* === Header Modern Redesign === */
+.site-header {
+  background: #fff;
+  padding: 10px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.site-logo {
+  height: 45px;
+}
+
+.nav {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.nav a {
+  padding: 8px 18px;
+  margin-left: 6px;
+  border-radius: 25px;
+  background-color: #f5f5f5;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.25s ease;
+}
+
+.nav a:hover {
+  background-color: #e9f1ff; /* лёгкий голубоватый оттенок */
+  color: #3b82f6; /* цвет логотипа */
+  transform: scale(1.05); /* плавное увеличение */
+}
