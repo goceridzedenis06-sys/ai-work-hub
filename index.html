@@ -243,51 +243,60 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnLeft = document.querySelector(".slide-btn.left");
   const btnRight = document.querySelector(".slide-btn.right");
 
+  if (!slider || !btnLeft || !btnRight) return;
+
+  // 🔁 Дублируем карточки: теперь внутри 1..10 + 1..10
+  slider.innerHTML = slider.innerHTML + slider.innerHTML;
+
+  const halfWidth = slider.scrollWidth / 2; // граница "реального" круга
   let isPaused = false;
-  const scrollStep = 1.2;   // скорость движения (меньше = медленнее)
-  const intervalTime = 15;  // интервал движения (меньше = плавнее)
-  const buffer = 20;        // запас пикселей до конца
+  const speed = 0.5; // скорость "реки" (можешь сделать 0.4 медленнее или 0.7 быстрее)
 
-  // === Бесконечная река ===
-  function loopScroll() {
+  // === Бесконечная плавная прокрутка ===
+  function loop() {
     if (!isPaused) {
-      slider.scrollLeft += scrollStep;
+      slider.scrollLeft += speed;
 
-      const maxScroll = slider.scrollWidth - slider.clientWidth;
-
-      // Когда почти дошли до конца — мгновенно (но незаметно) возвращаем в начало
-      if (slider.scrollLeft >= maxScroll - buffer) {
-        slider.scrollLeft = 1; // не 0, чтобы избежать дергания
+      // как только дошли до второй половины — мягко возвращаемся назад на такую же позицию
+      if (slider.scrollLeft >= halfWidth) {
+        slider.scrollLeft -= halfWidth;
+      } else if (slider.scrollLeft < 0) {
+        slider.scrollLeft += halfWidth;
       }
     }
+    requestAnimationFrame(loop);
   }
 
-  setInterval(loopScroll, intervalTime);
+  const step = () => slider.clientWidth / 2; // шаг стрелки — полэкрана
 
-  // === Управление стрелками ===
-  btnLeft.addEventListener("click", () => {
-    slider.scrollLeft -= slider.clientWidth / 2;
-    if (slider.scrollLeft <= 0) {
-      slider.scrollLeft = slider.scrollWidth - slider.clientWidth - buffer;
+  // === Стрелка вправо (листать по кругу) ===
+  btnRight.addEventListener("click", () => {
+    let target = slider.scrollLeft + step();
+    if (target >= halfWidth) {
+      target -= halfWidth;
     }
+    slider.scrollTo({ left: target, behavior: "smooth" });
   });
 
-  btnRight.addEventListener("click", () => {
-    slider.scrollLeft += slider.clientWidth / 2;
-    const maxScroll = slider.scrollWidth - slider.clientWidth;
-    if (slider.scrollLeft >= maxScroll - buffer) {
-      slider.scrollLeft = 1;
+  // === Стрелка влево (листать по кругу) ===
+  btnLeft.addEventListener("click", () => {
+    let target = slider.scrollLeft - step();
+    if (target < 0) {
+      target += halfWidth;
     }
+    slider.scrollTo({ left: target, behavior: "smooth" });
   });
 
   // === Пауза при наведении ===
   [slider, btnLeft, btnRight].forEach(el => {
-    el.addEventListener("mouseenter", () => (isPaused = true));
-    el.addEventListener("mouseleave", () => (isPaused = false));
+    el.addEventListener("mouseenter", () => { isPaused = true; });
+    el.addEventListener("mouseleave", () => { isPaused = false; });
   });
+
+  // Старт "реки"
+  requestAnimationFrame(loop);
 });
 </script>
-
   
 </body>
 </html>
