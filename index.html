@@ -237,5 +237,22 @@
     document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
   });
 </script>
+<script>
+  // Прокрутка влево/вправо
+  document.addEventListener("DOMContentLoaded", () => {
+    const slider = document.querySelector(".tools-slider");
+    const btnLeft = document.querySelector(".slide-btn.left");
+    const btnRight = document.querySelector(".slide-btn.right");
+
+    btnLeft.addEventListener("click", () => {
+      slider.scrollBy({ left: -300, behavior: "smooth" });
+    });
+
+    btnRight.addEventListener("click", () => {
+      slider.scrollBy({ left: 300, behavior: "smooth" });
+    });
+  });
+</script>
+  
 </body>
 </html>
