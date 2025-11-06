@@ -355,7 +355,7 @@ body {
   font-size: 0.95rem;
 }
 
-.post a.btn.small {
+.post .btn.small {
   background: #2563eb;
   color: #fff;
   font-weight: 600;
@@ -366,7 +366,7 @@ body {
   transition: background 0.3s ease;
 }
 
-.post a.btn.small:hover {
+.post .btn.small:hover {
   background: #1e40af;
 }
 
