@@ -242,54 +242,52 @@ document.addEventListener("DOMContentLoaded", () => {
   const slider = document.querySelector(".tools-slider");
   const btnLeft = document.querySelector(".slide-btn.left");
   const btnRight = document.querySelector(".slide-btn.right");
-  let isPaused = false;
-  const scrollStep = 1.2; // скорость движения (меньше = плавнее)
-  const intervalTime = 15; // частота кадров
-  const autoDelay = 6000; // пауза перед автопрокруткой
 
-  // === Плавная бесконечная прокрутка ===
-  function loopScroll() {
+  let isPaused = false;
+  const scrollSpeed = 0.6;  // скорость автопрокрутки (0.6 = плавно)
+  const autoDelay = 6000;   // каждые 6 секунд автопереход
+  let lastAutoScroll = 0;
+
+  // === Плавная бесконечная "река" ===
+  function loopScroll(timestamp) {
     if (!isPaused) {
-      slider.scrollLeft += scrollStep;
-      if (slider.scrollLeft >= slider.scrollWidth - slider.clientWidth - 1) {
-        slider.scrollLeft = 0; // плавно возвращаемся в начало
+      slider.scrollLeft += scrollSpeed;
+      const maxScroll = slider.scrollWidth - slider.clientWidth;
+
+      // если дошли до конца — плавно возвращаемся в начало
+      if (slider.scrollLeft >= maxScroll - 1) {
+        slider.scrollLeft = 0;
       }
     }
+
+    // Автоматический "пинок" каждые 6 секунд (для уверенности)
+    if (!isPaused && timestamp - lastAutoScroll > autoDelay) {
+      slider.scrollLeft += slider.clientWidth / 4;
+      const maxScroll = slider.scrollWidth - slider.clientWidth;
+      if (slider.scrollLeft >= maxScroll - 1) {
+        slider.scrollLeft = 0;
+      }
+      lastAutoScroll = timestamp;
+    }
+
+    requestAnimationFrame(loopScroll);
   }
 
   // === Управление стрелками ===
   btnLeft.addEventListener("click", () => {
     slider.scrollLeft -= slider.clientWidth / 2;
     if (slider.scrollLeft <= 0) {
-      slider.scrollLeft = slider.scrollWidth - slider.clientWidth; // прыгаем в конец
+      slider.scrollLeft = slider.scrollWidth - slider.clientWidth;
     }
   });
 
   btnRight.addEventListener("click", () => {
+    slider.scrollLeft += slider.clientWidth / 2;
     const maxScroll = slider.scrollWidth - slider.clientWidth;
     if (slider.scrollLeft >= maxScroll - 5) {
-      // если дошли до конца — возвращаемся в начало
-      slider.scrollTo({ left: 0, behavior: "smooth" });
-    } else {
-      slider.scrollBy({ left: slider.clientWidth / 2, behavior: "smooth" });
+      slider.scrollLeft = 0;
     }
   });
-
-  // === Автоматическая прокрутка ===
-  let autoScroll;
-  function startAutoScroll() {
-    clearInterval(autoScroll);
-    autoScroll = setInterval(() => {
-      if (!isPaused) {
-        slider.scrollLeft += slider.clientWidth / 4;
-        if (slider.scrollLeft >= slider.scrollWidth - slider.clientWidth) {
-          slider.scrollLeft = 0;
-        }
-      }
-    }, autoDelay);
-  }
-
-  startAutoScroll();
 
   // === Пауза при наведении ===
   [slider, btnLeft, btnRight].forEach(el => {
@@ -297,8 +295,8 @@ document.addEventListener("DOMContentLoaded", () => {
     el.addEventListener("mouseleave", () => (isPaused = false));
   });
 
-  // === Плавное постоянное движение ===
-  setInterval(loopScroll, intervalTime);
+  // Запускаем бесконечный цикл
+  requestAnimationFrame(loopScroll);
 });
 </script>
   
